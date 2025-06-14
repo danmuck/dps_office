@@ -1,20 +1,29 @@
+import React from "react";
 import UserCard from "@/app/api/components/users/UserCard";
 import type { User, } from "@/app/api/types/user";
 import { API_BASE } from "@/app/api/types/constants";
+import { redirect } from "next/navigation";
+import { apiFetch } from "@/app/api/utils";
+
+
 
 export default async function UsersPage() {
   // fetch from backend API (golang/gin:dps_http)
-  const res = await fetch(`${API_BASE}/users`, {
-    next: { revalidate: 60 },  // revalidate every minute
-    // cache: "no-store",         // always get fresh data on the server
-  });
+  // const res = await fetch(`${API_BASE}/users`, {
+  //   cache: "no-store",  
+  //   credentials: "include", // include cookies for session management
+  // });
+  // console.log("fetching users from", `${API_BASE}/users`);
+  // if (res.status !== 200  ) {
+  //   console.log("failed to fetch users:", res.status, res.statusText);
+  //   redirect("/"); // redirect to home page on error
+  // }
 
-  if (!res.ok) {
-    throw new Error(`failed to load users: ${res.status}`);
-  }
+  // const users: User[] = await res.json();
+  // console.log("fetched users:", res.status, res.statusText, users);
 
-  const users: User[] = await res.json();
-
+  const users = await apiFetch<User[]>("users", "", "GET");
+  
   return (
     <main className="p-4 flex flex-col gap-8 items-center sm:items-start">
       <h1 className="text-2xl font-bold">Users</h1>

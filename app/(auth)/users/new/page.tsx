@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { API_BASE } from "@/app/api/types/constants";
+import { apiFetch } from "@/app/api/utils";
 
 /*
 *    New User Page
@@ -31,12 +32,12 @@ export default function NewUserPage() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
-
     const res = await fetch(
       `${API_BASE}/users/${encodeURIComponent(username)}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({ username, email, password, confirm: confirmPassword }),
       }
     );

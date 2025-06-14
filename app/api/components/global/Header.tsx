@@ -19,8 +19,10 @@ const GlobalHeader: React.FC = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-                <a href="/login" className="hover:underline">Login</a>
-                <a href="/register" className="hover:underline">Register</a>
+                <Link href="/login" className="hover:underline">Login</Link>
+                <Link href="/logout" className="hover:underline">Logout</Link>
+                <Link href="users/dirtpig/profile" className="hover:underline">Profile</Link>
+                <Link href="/register" className="hover:underline">Register</Link>
             </div>
         </header>
     );
