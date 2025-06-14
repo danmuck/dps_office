@@ -28,13 +28,14 @@ export default function LoginPage() {
     const { username: user } = await res.json();
 
     // redirect to their profile
+
     redirect(`/users/${encodeURIComponent(user)}/profile`);
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-600">
-      <div className="max-w-md w-full bg-black p-8 rounded-lg shadow-lg">
-        <h1 className="text-white-500 text-3xl font-extrabold text-center mb-6">Login</h1>
+    <div className="pt-32 flex items-center justify-center">
+      <div className="max-w-md w-full bg-black p-8 border border-white rounded-lg shadow-lg">
+        <h1 className="text-2xl font-bold mb-4">Login</h1>
         <form action={loginAction} className="space-y-6">
           <div>
             <label htmlFor="username" className="block text-sm font-medium text-white-500">
@@ -61,12 +62,14 @@ export default function LoginPage() {
             />
           </div>
           <div className="flex justify-center items-center">
+
             <button
               type="submit"
-              className="w-[1/2] flex justify-center py-2 px-4 border-6 border-white text-sm font-medium rounded-full text-black bg-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-white-500"
+              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
             >
               Sign In
             </button>
+
           </div>
         </form>
       </div>

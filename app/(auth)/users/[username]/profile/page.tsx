@@ -39,7 +39,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
   // 3) Render
   return (
-    <div className="p-4 m-4 border rounded-lg">
+    <div className="p-4 m-4 border border-red-800 rounded-lg">
       <h1 className="text-2xl font-bold mb-4">
         {user.username}&apos;s Profile
       </h1>

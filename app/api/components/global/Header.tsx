@@ -1,7 +1,9 @@
 import { cookies } from "next/headers";
 import Link from "next/link";
 import React from "react";
-import { linkHover } from "@/app/api/styles";
+
+
+const linkHover = "hover:text-red-600";
 
 const GlobalHeader: React.FC = async () => {
     const cooks = await cookies();

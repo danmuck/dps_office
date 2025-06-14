@@ -34,60 +34,64 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Register</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="block text-sm font-medium">Username</label>
-          <input
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            className="mt-1 block w-full border rounded p-2"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            className="mt-1 block w-full border rounded p-2"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            className="mt-1 block w-full border rounded p-2"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium">Confirm Password</label> 
-          <input
-            type="password"
-            name="confirm"
-            value={form.confirm}
-            onChange={handleChange}
-            className="mt-1 block w-full border rounded p-2"
-            required
-          />
-        </div>
-        {error && <p className="text-red-600">{error}</p>}
-        <button
-          type="submit"
-          className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
-        >
-          Register
-        </button>
-      </form>
+    <div className="pt-32 flex items-center justify-center">
+      <div className="max-w-md w-full bg-black p-8 border border-white rounded-lg shadow-lg">
+        <h1 className="text-2xl font-bold mb-4">Register</h1>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium">Username</label>
+            <input
+              name="username"
+              value={form.username}
+              onChange={handleChange}
+              className="mt-1 block w-full border rounded p-2"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Email</label>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              className="mt-1 block w-full border rounded p-2"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Password</label>
+            <input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              className="mt-1 block w-full border rounded p-2"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium">Confirm Password</label> 
+            <input
+              type="password"
+              name="confirm"
+              value={form.confirm}
+              onChange={handleChange}
+              className="mt-1 block w-full border rounded p-2"
+              required
+            />
+            </div>
+            <div className="flex flex-col items-center mt-4">
+              {error && <p className="text-red-600">{error}</p>}
+              <button
+                type="submit"
+                className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+                >
+                Register
+              </button>
+            </div>
+        </form>
+      </div>
     </div>
   );
 }

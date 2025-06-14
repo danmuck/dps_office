@@ -15,20 +15,22 @@ export default function LogoutPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-600">
-      <div className="max-w-md w-full bg-black p-8 rounded-lg shadow-lg">
-        <h1 className="text-white-500 text-3xl font-extrabold text-center mb-6">Logout</h1>
+    <div className="pt-32 flex items-center justify-center">
+      <div className="max-w-md w-full bg-black p-8 border border-white rounded-lg shadow-lg">
+        <h1 className="text-2xl font-bold mb-4">Logout</h1>
         <p className="text-white-500 text-center mb-6">
           Are you sure you want to log out?
         </p>
         <div className="flex justify-center mt-20">
           <form action={logoutAction}>
+
             <button
               type="submit"
               className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
             >
               Log out
             </button>
+
           </form>
         </div>
       </div>
