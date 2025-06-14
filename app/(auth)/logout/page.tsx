@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { apiFetch } from "@/app/api/utils";
+import { apiFetch } from "@/app/api/utils.server";
 
 export default function LogoutPage() {
   async function logoutAction() {

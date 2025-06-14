@@ -2,14 +2,19 @@ import React from "react";
 
 const GlobalFooter: React.FC = () => {
     return (
-        <footer className="w-full flex flex-col p-2 row-start-3 gap-[24px] items-center justify-center bg-gray-100">
+        <footer className="
+            w-full flex flex-col p-2 row-start-3 
+            gap-[24px] 
+            items-center justify-center 
+            bg-gray-100
+        ">
             <div className="
                 flex items-center 
                 gap-8 p-4 m-0 
-                rounded-full border-1 border-black
+                rounded-full border-1 border-white
             ">
                 <p className="text-gray-600">
-                    Next.js // React // Typescript
+                    Next.js // React // Typescript // Tailwind CSS // Golang // Gin // MongoDB
                 </p>
             </div>
             <p className="text-xs text-gray-600">© {new Date().getFullYear()} danmuck</p>

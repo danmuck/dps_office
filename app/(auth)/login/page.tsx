@@ -1,4 +1,4 @@
-import { apiRequest } from "@/app/api/utils";
+import { apiRequest } from "@/app/api/utils.server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 

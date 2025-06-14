@@ -3,19 +3,18 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { API_BASE } from "@/app/api/types/constants";
-import { apiFetch } from "@/app/api/utils";
 
-/*
-*    New User Page
-*
-*    This is the sign up page for creating a new user.
-*    It allows users to enter their name, email, password, and confirm password.
-*    On submission, it sends a POST request to the backend API to create the user.
-*     If successful, it redirects to the users list page.
-*    If there is an error, it displays the error message.
-*    This page is a client component that uses React hooks for state management.
-* 
-*/
+
+//
+//   New User Page
+//   This is the sign up page for creating a new user.
+//   It allows users to enter their name, email, password, and confirm password.
+//   On submission, it sends a POST request to the backend API to create the user.
+//    If successful, it redirects to the users list page.
+//   If there is an error, it displays the error message.
+//   This page is a client component that uses React hooks for state management.
+//
+// //
 export default function NewUserPage() {
   const router = useRouter();
   const [id, setId] = useState("");
@@ -25,10 +24,13 @@ export default function NewUserPage() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  // prepare the form submission handler
-  // this function will be called when the form is submitted
-  // it will prevent the default form submission behavior
-  // and instead send a POST request to the backend API
+  //
+  //  prepare the form submission handler
+  //  this function will be called when the form is submitted
+  //  it will prevent the default form submission behavior
+  //  and instead send a POST request to the backend API
+  //
+  // //
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError(null);
