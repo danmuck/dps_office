@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="350" height="150" viewBox="0 0 350 150">
+  <defs>
+    <style>
+      text {
+        font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+        font-size: 110px;
+        font-weight: 900;
+        letter-spacing: -5px;
+        fill: #000;
+        stroke: #000;
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </defs>
+  <text x="20" y="110">dm.</text>
+</svg>

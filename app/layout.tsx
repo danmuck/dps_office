@@ -26,31 +26,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-screen">
+    <html lang="en" className="overflow-auto">
       <body
         className={`
-          flex flex-col h-full 
+          flex flex-col h-screen 
           ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <GlobalHeader />
 
         <main className="
+          max-h-full
+          overflow-hidden
           flex-1
-          sm: px-12 md:px-32 xl:px-56 
+          flex
+          sm:px-12 md:px-32 xl:px-48 
         ">
           <div className="
-            h-full 
+            flex-1
             border-0 
             border-pink-600
             bg-black
             overflow-auto
           ">
             <div className="
+              h-auto
+              overflow-auto
               p-4 m-8 
-              h-full 
               border rounded-lg 
-              border-red-800
-              flex-row items-center justify-center">
+              border-white
+              flex-1 flex-row items-center justify-center">
               {children}
             </div>
 

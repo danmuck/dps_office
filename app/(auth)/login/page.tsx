@@ -1,8 +1,14 @@
-import { apiRequest } from "@/app/api/utils.server";
+import { apiRequest, setCookiesFromResponseHeaders } from "@/app/api/utils.server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 
+/**
+ * LoginPage component handles user login functionality.
+ * It provides a form for users to enter their credentials and submit them.
+ * 
+ * @returns {JSX.Element} The rendered LoginPage component.
+ */
 export default function LoginPage() {
   async function loginAction(formData: FormData) {
     "use server";
@@ -12,22 +18,9 @@ export default function LoginPage() {
 
     const res = await apiRequest("auth", "login", "POST", { username, password });
 
-    const sc = res.headers.get("set-cookie");
-    if (sc) {
-      const raw = sc.split(";")[0];      // "jwt=XYZ"
-      const [, token] = raw.split("=");
-      const cooks = await cookies();
-      cooks.set({
-        name: "jwt",
-        value: token,
-        path: "/",
-        httpOnly: true,
-      });
-    }
+    setCookiesFromResponseHeaders(res.headers, ["jwt", "username"]);
 
     const { username: user } = await res.json();
-
-    // redirect to their profile
 
     redirect(`/users/${encodeURIComponent(user)}/profile`);
   }

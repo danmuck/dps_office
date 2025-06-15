@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import type { User } from "@/app/api/types/user";
 import { clientFetch } from "../../utils.client";
 import ToggledFormInput from "../ToggledFormInput";
+import ToggledSelectorFormInput from "../ToggledSelectorFormInput";
 
 interface UserEditFormProps {
   initialUser: User;
@@ -16,7 +17,7 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
     email: "",
     bio: "",
     avatarURL: "",
-    roles: ""
+    roles: initialUser.roles ?? [] as string[],
   });
 
   // which fields are editable?
@@ -44,13 +45,15 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
     });
   }
 
-  function handleChange(
+  function handleSettingChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
     const { name, value } = e.target;
     setForm((f) => ({ ...f, [name]: value }));
   }
-
+  function handleRoleChange(newRoles: string[]) {
+    setForm((f) => ({ ...f, roles: newRoles }));
+  }
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
@@ -68,7 +71,8 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="max-w-md w-full bg-black p-8 rounded-lg shadow-lg">
-        <h2 className="text-xl font-semibold text-white">Edit Profile</h2>
+        <h2 className="text-5xl font-semibold text-white">[{initialUser.username}]</h2>
+
         {error && <p className="text-red-600">{error}</p>}
 
         {/** --- Email --- **/}
@@ -80,7 +84,7 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
             value={form.email}
             editMode={editMode.email}
             onToggle={() => toggleField("email")}
-            onChange={handleChange}
+            onChange={handleSettingChange}
             />
         </div>
 
@@ -92,7 +96,7 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
             value={form.bio}
             editMode={editMode.bio}
             onToggle={() => toggleField("bio")}
-            onChange={handleChange}
+            onChange={handleSettingChange}
             textarea
             rows={4}
             />
@@ -105,9 +109,23 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
             value={form.avatarURL}
             editMode={editMode.avatarURL}
             onToggle={() => toggleField("avatarURL")}
-            onChange={handleChange}
+            onChange={handleSettingChange}
             />
 
+        {/** --- Roles --- **/}
+        <ToggledSelectorFormInput
+            name="roles"
+            label="Roles"
+            value={form.roles}
+            editMode={editMode.roles}
+            onToggle={() => toggleField("roles")}
+            onChange={handleRoleChange}
+            options={[
+              "+user",
+              "admin",
+              "dev"
+            ]}
+          />
         {/** --- Save --- **/}
         <div className="flex justify-center mt-6">
           <button

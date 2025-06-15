@@ -2,6 +2,12 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { apiFetch } from "@/app/api/utils.server";
 
+/**
+ * LogoutPage component handles user logout functionality.
+ * It provides a confirmation prompt and performs the logout action.
+ * 
+ * @returns {JSX.Element} The rendered LogoutPage component.
+ */
 export default function LogoutPage() {
   async function logoutAction() {
     "use server";
@@ -10,7 +16,9 @@ export default function LogoutPage() {
     if (!res) {
       console.warn("LogoutPage: failed to log out");
     }
+    // NOTE: clear cookies manually for now at least
     (await cookies()).delete("jwt");
+    (await cookies()).delete("username");
     redirect("/");
   }
 
