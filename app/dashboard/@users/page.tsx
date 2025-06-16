@@ -1,3 +1,4 @@
+import UserGrowthGraph from "@/app/api/components/metrics/UserGrowth";
 import { apiFetch } from "@/app/api/utils.server";
 import React from "react";
 
@@ -72,29 +73,30 @@ export default async function UserMetricsModule() {
 		<div className="min-h-lg p-4 m-4 border rounded-lg">
 			<h2 className="text-xl font-bold">User Metrics</h2>
 
+			{/* Display error message if any */}
 			{user_metrics.error ? (
 				<p className="text-red-600">{user_metrics.error}</p>
 			) : (
 				<>
-					<p className="text-gray-200 text-lg">
-						Total users: {user_metrics.total_users}
-					</p>
-					<p className="text-gray-200 text-lg">
-						Over time: {user_metrics.users_over_time.length}
-					</p>
-					<ul className="mt-2 text-gray-400 text-sm space-y-1">
-						{user_metrics.total_roles &&
-							Object.entries(user_metrics.total_roles).map(
-								([role, count]) => (
-									<li key={role}>
-										<span className="font-medium">
-											{role}
-										</span>
-										: {count}
-									</li>
-								)
-							)}
-					</ul>
+					<div>
+						<UserGrowthGraph data={user_metrics.users_over_time} />
+					</div>
+					<div className="flex-row mt-2 text-gray-400 text-sm">
+						<p>Total users: {user_metrics.total_users}</p>
+						<ul>
+							{user_metrics.total_roles &&
+								Object.entries(user_metrics.total_roles).map(
+									([role, count]) => (
+										<li key={role}>
+											<span className="font-medium">
+												{role}
+											</span>
+											: {count}
+										</li>
+									)
+								)}
+						</ul>
+					</div>
 				</>
 			)}
 		</div>

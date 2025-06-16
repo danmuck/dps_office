@@ -4,65 +4,69 @@ import "./globals.css";
 import GlobalHeader from "./api/components/global/Header";
 import GlobalFooter from "./api/components/global/Footer";
 
-
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+	variable: "--font-geist-sans",
+	subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+	variable: "--font-geist-mono",
+	subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "dps_office",
-  description: "daily assistant dashboard",
+	title: "dps_office",
+	description: "daily assistant dashboard",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" className="overflow-auto">
-      <body
-        className={`
+	return (
+		<html lang="en" className="overflow-auto">
+			<body
+				className={`
           flex flex-col h-screen 
           ${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <GlobalHeader />
+			>
+				<GlobalHeader />
 
-        <main className="
+				<main
+					className="
           max-h-full
           overflow-hidden
           flex-1
           flex
-          sm:px-12 md:px-32 xl:px-48 
-        ">
-          <div className="
+          sm:px-4 md:px-16 xl:px-32
+        "
+				>
+					<div
+						className="
             flex-1
-            border-0 
+            border-5 
             border-pink-600
             bg-black
             overflow-auto
-          ">
-            <div className="
+          "
+					>
+						<div
+							className="
               h-auto
               overflow-auto
               p-4 m-8 
               border rounded-lg 
               border-white
-              flex-1 flex-row items-center justify-center">
-              {children}
-            </div>
+              flex-1 flex-row items-center justify-center"
+						>
+							{children}
+						</div>
+					</div>
+				</main>
 
-          </div>
-        </main>
-
-        <GlobalFooter />
-      </body>
-    </html>
-  );
+				<GlobalFooter />
+			</body>
+		</html>
+	);
 }
