@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { Button } from "@headlessui/react";
 import Link from "next/link";
+import { Button } from "@mui/material";
 
 export default function Home() {
 	return (
