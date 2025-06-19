@@ -46,7 +46,7 @@ export default function RootLayout({
 						className="
             flex-1
             border-5 
-            border-pink-600
+            border-none
             bg-black
             overflow-auto
           "

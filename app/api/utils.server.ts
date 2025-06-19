@@ -1,9 +1,15 @@
 import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { API_BASE } from "./types/constants";
 
+//
+// -- -- constants -- --
+// //
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 300;
+
+//
+// -- -- API Fetches -- --
+// //
 
 /**
  * Fetch a JSON‐returning, JWT‐protected endpoint.
@@ -42,6 +48,14 @@ export async function apiFetch<T>(
   return (await res.json()) as T;
 }
 
+
+export class UnauthorizedError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "UnauthorizedError";
+  }
+}
+
 /**
  * Makes a JWT-authenticated API request to your backend.
  * Automatically includes cookies, builds headers, logs the request, and retries on failure.
@@ -65,10 +79,17 @@ export async function apiRequest(
 ): Promise<Response> {
   const cookieStore = await cookies();
   const token = cookieStore.get("jwt")?.value.trim() ?? "";
+  const username = cookieStore.get("username")?.value.trim() ?? "";
   const path = endpoint ? `${rel_path}/${endpoint}` : rel_path;
   const url = `${API_BASE}/${path}`;
   const headers = new Headers({ "Content-Type": "application/json" });
-  if (token) headers.set("cookie", `jwt=${token}`);
+  // Include both JWT and username cookies in one header
+  const cookieParts: string[] = [];
+  if (token) cookieParts.push(`jwt=${token}`);
+  if (username) cookieParts.push(`username=${username}`);
+  if (cookieParts.length > 0) {
+    headers.set("cookie", cookieParts.join("; "));
+  }
 
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     try {
@@ -84,7 +105,8 @@ export async function apiRequest(
 
       if (res.status === 401) {
         console.warn(`[apiRequest] Unauthorized. Redirecting to home.`);
-        redirect("/");
+        throw new UnauthorizedError("Unauthorized access. Please log in again.");
+        // redirect("/");
       }
 
       if (!res.ok) {
@@ -95,6 +117,10 @@ export async function apiRequest(
       return res;
     } catch (err) {
       console.error(`[apiRequest] Attempt ${attempt} failed:`, err);
+      if (err instanceof UnauthorizedError) {
+        console.warn(`[apiRequest] Unauthorized error: ${err.message}`);
+        throw err
+      }
       if (attempt === MAX_RETRIES) throw err;
       await new Promise((res) => setTimeout(res, RETRY_DELAY_MS));
     }
@@ -103,6 +129,9 @@ export async function apiRequest(
   throw new Error("Unreachable code: API retries exceeded");
 }
 
+// 
+// -- -- Cookies -- --
+// //
 interface CookieOptions {
   path?: string;
   httpOnly?: boolean;
@@ -113,7 +142,8 @@ interface CookieOptions {
 const DEFAULT_OPTS: CookieOptions = {
   path: "/",
   httpOnly: true,
-  secure: true,
+  // In production, this should be true. For development over HTTP, set to false.
+  secure: false,
   sameSite: "lax",
 };
 
