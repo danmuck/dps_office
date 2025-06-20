@@ -1,81 +1,78 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { Tabs, Tab, Box, Button } from "@mui/material";
 
 export interface TabItem {
-  id: string;
-  label: string;
-  content: React.ReactNode;
+	id: string;
+	label: string;
+	content: React.ReactNode;
 }
 
 interface TabsProps {
-  initialTabs: TabItem[];
+	initialTabs: TabItem[];
 }
 
 export default function DynamicTabs({ initialTabs }: TabsProps) {
-  const [tabs, setTabs] = useState<TabItem[]>(initialTabs);
-  const [activeId, setActiveId] = useState<string>(
-    initialTabs[0]?.id ?? ""
-  );
+	const [tabs, setTabs] = useState<TabItem[]>(initialTabs);
+	const [activeId, setActiveId] = useState<string>(initialTabs[0]?.id ?? "");
 
-  // if tabs change and activeId no longer exists, reset to first
-  useEffect(() => {
-    if (!tabs.find((t) => t.id === activeId) && tabs.length > 0) {
-      setActiveId(tabs[0].id);
-    }
-  }, [tabs, activeId]);
+	// if tabs change and activeId no longer exists, reset to first
+	useEffect(() => {
+		if (!tabs.find((t) => t.id === activeId) && tabs.length > 0) {
+			setActiveId(tabs[0].id);
+		}
+	}, [tabs, activeId]);
 
-  return (
-    <div>
-      {/* Tab Buttons */}
-      <div className="flex border-b">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveId(tab.id)}
-            className={`px-4 py-2 -mb-px ${
-              tab.id === activeId
-                ? "border-b-2 border-blue-600 font-semibold"
-                : "text-gray-500"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
-      </div>
+	return (
+		<Box>
+			{/* Tab List */}
+			<Tabs
+				value={activeId}
+				onChange={(_, newValue) => setActiveId(newValue)}
+				variant="scrollable"
+				scrollButtons="auto"
+			>
+				{tabs.map((tab) => (
+					<Tab key={tab.id} label={tab.label} value={tab.id} />
+				))}
+			</Tabs>
 
-      {/* Active Panel */}
-      <div className="p-4">
-        {tabs.map(
-          (tab) =>
-            tab.id === activeId && (
-              <div key={tab.id}>{tab.content}</div>
-            )
-        )}
-      </div>
+			{/* Active Panel */}
+			<Box sx={{ p: 2 }}>
+				{tabs.map(
+					(tab) =>
+						tab.id === activeId && (
+							<Box key={tab.id}>{tab.content}</Box>
+						)
+				)}
+			</Box>
 
-      {/* todo: expose a way to add a tab */}
-      <div className="mt-4">
-        <button
-          onClick={() => {
-            const newId = prompt("Tab ID (unique)");
-            const newLabel = prompt("Tab Label");
-            if (newId && newLabel) {
-              setTabs([
-                ...tabs,
-                {
-                  id: newId,
-                  label: newLabel,
-                  content: <p>This is the "{newLabel}" tab.</p>,
-                },
-              ]);
-              setActiveId(newId);
-            }
-          }}
-          className="text-sm text-blue-600 hover:underline"
-        >
-          + Add Tab
-        </button>
-      </div>
-    </div>
-  );
+			{/* + Add Tab */}
+			<Box sx={{ mt: 2 }}>
+				<Button
+					variant="text"
+					color="primary"
+					onClick={() => {
+						const newId = prompt("Tab ID (unique)");
+						const newLabel = prompt("Tab Label");
+						if (newId && newLabel) {
+							setTabs((prev) => [
+								...prev,
+								{
+									id: newId,
+									label: newLabel,
+									content: (
+										<p>This is the "{newLabel}" tab.</p>
+									),
+								},
+							]);
+							setActiveId(newId);
+						}
+					}}
+				>
+					+ Add Tab
+				</Button>
+			</Box>
+		</Box>
+	);
 }

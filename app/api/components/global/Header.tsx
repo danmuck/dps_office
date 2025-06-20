@@ -2,8 +2,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-
-const linkHover = "hover:text-red-600";
+import { AppBar, Toolbar, Box, Button } from "@mui/material";
 
 const GlobalHeader: React.FC = async () => {
 	const cooks = await cookies();
@@ -11,65 +10,94 @@ const GlobalHeader: React.FC = async () => {
 	const token = cooks.get("jwt")?.value || "";
 	const isLoggedIn = Boolean(token);
 	return (
-		<div className="flex items-center justify-between mt-8 ml-8 p-2  bg-white text-black shadow-sm rounded-s-4xl">
-			<h1 className="text-xl font-bold">
-				<Link href="/users/dirtpig/profile" className={linkHover}>
-					<Image
-						src="/full_logo.svg"
-						alt="danmuck"
-						width={144}
-						height={144}
-						className="inline-block ml-2"
-					/>
-				</Link>
-			</h1>
-			<div className="ml-auto flex items-center space-x-6 pr-24">
-				<nav>
-					<ul className="flex items-center space-x-4 border-red border-3 rounded-lg p-2">
-						<Link href="/" className={linkHover}>
-							Home
-						</Link>
-						<Link href="/registry" className={linkHover}>
-							Registry
-						</Link>
-						<Link href="/dashboard" className={linkHover}>
-							Dashboard
-						</Link>
-					</ul>
-				</nav>
-				<div className="flex items-center space-x-4 border-red border-3 rounded-lg p-2">
-					<Link href="/users/new" className={linkHover}>
-						[dev]
+		<AppBar position="static" color="default" elevation={1}>
+			<Toolbar sx={{ bgcolor: "common.white", color: "common.black" }}>
+				{/* logo & title */}
+				<Box sx={{ display: "flex", alignItems: "center", mr: 4 }}>
+					<Link href="/users/dirtpig/profile" passHref>
+						<Box
+							component="div"
+							sx={{
+								display: "flex",
+								alignItems: "center",
+								textDecoration: "none",
+								color: "inherit",
+							}}
+						>
+							<Image
+								src="/full_logo.svg"
+								alt="danmuck"
+								width={128}
+								height={128}
+							/>
+						</Box>
 					</Link>
-					<Link href="/users" className={linkHover}>
-						Users
-					</Link>
-					<Link href="/users/dirtpig/profile" className={linkHover}>
-						Profile
-					</Link>
-					<Link href="/users/dirtpig/settings" className={linkHover}>
-						Settings
-					</Link>
-				</div>
+				</Box>
 
-				<div className="flex items-center space-x-4 border-red border-3 rounded-lg p-2">
+				{/* primary navigation */}
+				<Box sx={{ display: "flex", gap: 2, flexGrow: 1 }}>
+					<Button component={Link} href="/" color="inherit">
+						Home
+					</Button>
+					<Button component={Link} href="/registry" color="inherit">
+						Registry
+					</Button>
+					<Button component={Link} href="/dashboard" color="inherit">
+						Dashboard
+					</Button>
+				</Box>
+
+				{/* user links */}
+				<Box sx={{ display: "flex", gap: 2, mr: 2 }}>
+					<Button component={Link} href="/users/new" color="inherit">
+						[dev]
+					</Button>
+					<Button component={Link} href="/users" color="inherit">
+						Users
+					</Button>
+					<Button
+						component={Link}
+						href="/users/dirtpig/profile"
+						color="inherit"
+					>
+						Profile
+					</Button>
+					<Button
+						component={Link}
+						href="/users/dirtpig/settings"
+						color="inherit"
+					>
+						Settings
+					</Button>
+				</Box>
+
+				{/* auth actions */}
+				<Box sx={{ display: "flex", gap: 1 }}>
 					{isLoggedIn ? (
-						<Link href="/logout" className={linkHover}>
+						<Button component={Link} href="/logout" color="inherit">
 							Logout
-						</Link>
+						</Button>
 					) : (
 						<>
-							<Link href="/login" className={linkHover}>
+							<Button
+								component={Link}
+								href="/login"
+								color="inherit"
+							>
 								Login
-							</Link>
-							<Link href="/register" className={linkHover}>
+							</Button>
+							<Button
+								component={Link}
+								href="/register"
+								color="inherit"
+							>
 								Register
-							</Link>
+							</Button>
 						</>
 					)}
-				</div>
-			</div>
-		</div>
+				</Box>
+			</Toolbar>
+		</AppBar>
 	);
 };
 export default GlobalHeader;

@@ -2,52 +2,70 @@ import React from "react";
 import Link from "next/link";
 import type { User } from "@/app/api/types/user";
 
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import CardActionArea from "@mui/material/CardActionArea";
+import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
+import Box from "@mui/material/Box";
 
 interface UserCardProps {
-  user: User;
+	user: User;
+	noScroll?: boolean;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user }) => (
-  <div className="
-    p-4 m-4 
-    border rounded-lg 
-    bg-white shadow
-    max-w-sm w-full max-h-sm aspect-[4/3]
-">
-    <h2 className="text-xl font-semibold mb-2 text-gray-800">
-        <Link href={`/users/${user.username}/profile`} className=" hover:underline">
-            {user.username}
-        </Link>
-    </h2>
-    <hr className="mb-4 text-gray-800" />
-    <div className="space-y-2 text-gray-700">
-      <p><strong>ID:</strong> {user._id}</p>
-      <p><strong>Username:</strong> {user.username}</p>
-      <p><strong>Email:</strong> {user.email}</p>
-      <p><strong>Roles:</strong> {user.roles.join(", ")}</p>
-        <p><strong>Joined:</strong> {new Date(user.joined).toLocaleDateString()}</p>
-        {user.bio && <p><strong>Bio:</strong> {user.bio}</p>}
-        {/* {user.avatar && (
-          <Image 
-            src={user.avatar}
-            alt={`${user.username}'s avatar`}
-            width={50}
-            height={50}
-            className="rounded-full">
-            </Image>
-        )} */}
-        {user.isActive !== undefined && (
-          <p>
-            <strong>Status:</strong> {user.isActive ? "Active" : "Inactive"}
-          </p>
-        )}
-        {user.lastActive && (
-          <p>
-            <strong>Last Active:</strong> {new Date(user.lastActive).toLocaleString()}
-          </p>
-        )}
-    </div>
-  </div>
+const UserCard: React.FC<UserCardProps> = ({ user, noScroll = true }) => (
+	<Card
+		sx={{
+			maxWidth: 300,
+			width: "100%",
+			...(noScroll ? { height: "100%" } : { aspectRatio: "4/3" }),
+			display: "flex",
+			flexDirection: "column",
+		}}
+	>
+		<CardActionArea
+			component={Link}
+			href={`/users/${user.username}/profile`}
+			sx={{ flexShrink: 0 }}
+		>
+			<CardHeader title={user.username} />
+		</CardActionArea>
+		<CardContent
+			sx={{
+				flexGrow: 1,
+				overflow: noScroll ? "visible" : "auto",
+			}}
+		>
+			<Typography variant="body2">
+				<strong>ID:</strong> {user._id}
+			</Typography>
+			<Typography variant="body2">
+				<strong>Email:</strong> {user.email}
+			</Typography>
+			{user.bio && (
+				<Typography variant="body2" sx={{ mt: 1 }}>
+					<strong>Bio:</strong> {user.bio}
+				</Typography>
+			)}
+			<Typography variant="body2" sx={{ mt: 1 }}>
+				<strong>Joined:</strong>{" "}
+				{new Date(user.joined).toLocaleDateString()}
+			</Typography>
+		</CardContent>
+		<CardActions sx={{ flexWrap: "wrap", gap: 1 }}>
+			<Chip label={user.roles.join(", ")} size="small" />
+			{user.isActive !== undefined && (
+				<Chip
+					label={user.isActive ? "Active" : "Inactive"}
+					size="small"
+					color={user.isActive ? "success" : "default"}
+				/>
+			)}
+		</CardActions>
+	</Card>
 );
 
 export default UserCard;

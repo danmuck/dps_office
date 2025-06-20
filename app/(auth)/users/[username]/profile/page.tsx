@@ -1,3 +1,4 @@
+import { Container, Paper, Box, Typography } from "@mui/material";
 import DynamicTabs, { TabItem } from "@/app/api/components/DynamicTabs";
 import UserCard from "@/app/api/components/users/UserCard";
 import type { User } from "@/app/api/types/user";
@@ -47,11 +48,15 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 
 	// 3) Render
 	return (
-		<div className="p-4 m-4 border border-red-800 rounded-lg">
-			<h1 className="text-2xl font-bold mb-4">
-				{user.username}&apos;s Profile
-			</h1>
-			<DynamicTabs initialTabs={tabs} />
-		</div>
+		<Container maxWidth="md" sx={{ py: 4 }}>
+			<Paper elevation={3} sx={{ p: 3 }}>
+				<Typography variant="h4" component="h1" gutterBottom>
+					Profile: {user.username}
+				</Typography>
+				<Box sx={{ mt: 2 }}>
+					<DynamicTabs initialTabs={tabs} />
+				</Box>
+			</Paper>
+		</Container>
 	);
 }

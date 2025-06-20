@@ -1,6 +1,14 @@
 import UserGrowthGraph from "@/app/api/components/metrics/UserGrowth";
 import { apiFetch } from "@/app/api/utils.server";
 import React from "react";
+import {
+	Container,
+	Paper,
+	Box,
+	Typography,
+	List,
+	ListItem,
+} from "@mui/material";
 
 /**
  * RoleCounts type represents a mapping of role names to their respective user counts.
@@ -70,35 +78,49 @@ export default async function UserMetricsModule() {
 	}
 
 	return (
-		<div className="min-h-lg p-4 m-4 border rounded-lg">
-			<h2 className="text-xl font-bold">User Metrics</h2>
-
-			{/* Display error message if any */}
-			{user_metrics.error ? (
-				<p className="text-red-600">{user_metrics.error}</p>
-			) : (
-				<>
-					<div>
-						<UserGrowthGraph data={user_metrics.users_over_time} />
-					</div>
-					<div className="flex-row mt-2 text-gray-400 text-sm">
-						<p>Total users: {user_metrics.total_users}</p>
-						<ul>
-							{user_metrics.total_roles &&
-								Object.entries(user_metrics.total_roles).map(
+		<Container maxWidth="md" sx={{ py: 4 }}>
+			<Paper elevation={2} sx={{ p: 3 }}>
+				<Typography variant="h5" component="h2" gutterBottom>
+					User Metrics
+				</Typography>
+				{user_metrics.error ? (
+					<Typography color="error" variant="body2" gutterBottom>
+						{user_metrics.error}
+					</Typography>
+				) : (
+					<>
+						<Box sx={{ mb: 2 }}>
+							<UserGrowthGraph
+								data={user_metrics.users_over_time}
+							/>
+						</Box>
+						<Box sx={{ mt: 2, color: "text.secondary" }}>
+							<Typography variant="body2">
+								Total users: {user_metrics.total_users}
+							</Typography>
+							<List dense>
+								{Object.entries(user_metrics.total_roles).map(
 									([role, count]) => (
-										<li key={role}>
-											<span className="font-medium">
+										<ListItem
+											key={role}
+											sx={{ py: 0, px: 0 }}
+										>
+											<Typography
+												variant="body2"
+												component="span"
+												sx={{ fontWeight: "medium" }}
+											>
 												{role}
-											</span>
-											: {count}
-										</li>
+											</Typography>
+											{`: ${count}`}
+										</ListItem>
 									)
 								)}
-						</ul>
-					</div>
-				</>
-			)}
-		</div>
+							</List>
+						</Box>
+					</>
+				)}
+			</Paper>
+		</Container>
 	);
 }

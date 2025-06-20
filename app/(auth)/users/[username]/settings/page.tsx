@@ -2,6 +2,7 @@ import type { User } from "@/app/api/types/user";
 import ModifyUser from "@/app/api/components/users/ModifyUser";
 import { apiFetch, UnauthorizedError } from "@/app/api/utils.server";
 import { redirect } from "next/navigation";
+import { Container, Paper, Box, Typography } from "@mui/material";
 
 interface PageProps {
 	params: { username: string };
@@ -21,13 +22,17 @@ export default async function ModifyUserPage({ params }: PageProps) {
 		throw err;
 	}
 	return (
-		<>
-			<div className=" flex items-center justify-center">
-				<div className="max-w-lg w-full bg-black p-8 m-8 border border-white rounded-lg shadow-lg">
-					<h1 className="text-2xl font-bold mb-4">Settings</h1>
-					<ModifyUser initialUser={user} />
-				</div>
-			</div>
-		</>
+		<Container maxWidth="md" sx={{ py: 4 }}>
+			<Paper elevation={3} sx={{ p: 4 }}>
+				<Typography variant="h4" component="h1" gutterBottom>
+					Settings
+				</Typography>
+				<Box sx={{ mt: 2, display: "flex", justifyContent: "center" }}>
+					<Box sx={{ width: "100%", maxWidth: 600 }}>
+						<ModifyUser initialUser={user} />
+					</Box>
+				</Box>
+			</Paper>
+		</Container>
 	);
 }

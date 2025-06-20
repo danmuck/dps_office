@@ -3,6 +3,7 @@ import UserCard from "@/app/api/components/users/UserCard";
 import type { User } from "@/app/api/types/user";
 import { apiFetch, UnauthorizedError } from "@/app/api/utils.server";
 import { redirect } from "next/navigation";
+import { Container, Typography, Grid } from "@mui/material";
 
 export default async function UsersPage() {
 	let users = [] as User[];
@@ -18,16 +19,22 @@ export default async function UsersPage() {
 	}
 
 	return (
-		<main className="p-4 flex flex-col gap-8 items-center sm:items-start">
-			<h1 className="text-2xl font-bold">Users</h1>
-			<ul className="space-y-2 w-full flex flex-wrap">
+		<Container maxWidth="lg" sx={{ py: 4 }}>
+			<Typography variant="h4" component="h1" gutterBottom>
+				Users
+			</Typography>
+
+			<Grid container spacing={2}>
 				{users.map((user) => (
-					<UserCard key={user._id} user={user} />
+					<Grid key={user._id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+						<UserCard user={user} />
+					</Grid>
 				))}
-			</ul>
-			<p className="mt-4 text-sm text-gray-500">
+			</Grid>
+
+			<Typography variant="caption" color="text.secondary" sx={{ mt: 2 }}>
 				Last fetched: {new Date().toLocaleTimeString()}
-			</p>
-		</main>
+			</Typography>
+		</Container>
 	);
 }

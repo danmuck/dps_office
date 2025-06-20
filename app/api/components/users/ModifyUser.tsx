@@ -2,141 +2,221 @@
 
 import React, { useState } from "react";
 import type { User } from "@/app/api/types/user";
+import {
+	Box,
+	Typography,
+	Switch,
+	FormControlLabel,
+	TextField,
+	FormControl,
+	InputLabel,
+	Select,
+	MenuItem,
+	Checkbox,
+	ListItemText,
+	Button,
+} from "@mui/material";
 import { clientFetch } from "../../utils.client";
-import ToggledFormInput from "../ToggledFormInput";
-import ToggledSelectorFormInput from "../ToggledSelectorFormInput";
 
 interface UserEditFormProps {
-  initialUser: User;
+	initialUser: User;
 }
 
 export default function ModifyUser({ initialUser }: UserEditFormProps) {
+	// form state is only populated once you enable editing
+	const [form, setForm] = useState({
+		email: "",
+		bio: "",
+		avatarURL: "",
+		roles: initialUser.roles ?? ([] as string[]),
+	});
 
-  // form state is only populated once you enable editing
-  const [form, setForm] = useState({
-    email: "",
-    bio: "",
-    avatarURL: "",
-    roles: initialUser.roles ?? [] as string[],
-  });
+	// which fields are editable?
+	const [editMode, setEditMode] = useState({
+		email: false,
+		bio: false,
+		avatarURL: false,
+		roles: false,
+	});
 
-  // which fields are editable?
-  const [editMode, setEditMode] = useState({
-    email: false,
-    bio: false,
-    avatarURL: false,
-    roles: false
-  });
+	const [error, setError] = useState("");
+	const [saving, setSaving] = useState(false);
 
-  const [error, setError] = useState("");
-  const [saving, setSaving] = useState(false);
+	function toggleField(field: keyof typeof form) {
+		setEditMode((prev) => {
+			const nowOn = !prev[field];
+			// seed only if turning on AND value is still empty
+			if (nowOn && form[field] === "") {
+				setForm((f) => ({
+					...f,
+					[field]: (initialUser as any)[field] ?? "",
+				}));
+			}
+			return { ...prev, [field]: nowOn };
+		});
+	}
 
-  function toggleField(field: keyof typeof form) {
-    setEditMode((prev) => {
-      const nowOn = !prev[field];
-      // seed only if turning on AND value is still empty
-      if (nowOn && form[field] === "") {
-        setForm((f) => ({
-          ...f,
-          [field]: (initialUser as any)[field] ?? "",
-        }));
-      }
-      return { ...prev, [field]: nowOn };
-    });
-  }
+	function handleSettingChange(
+		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+	) {
+		const { name, value } = e.target;
+		setForm((f) => ({ ...f, [name]: value }));
+	}
+	function handleRoleChange(newRoles: string[]) {
+		setForm((f) => ({ ...f, roles: newRoles }));
+	}
+	async function handleSubmit(e: React.FormEvent) {
+		e.preventDefault();
+		setSaving(true);
+		setError("");
+		try {
+			await clientFetch<User>("users", initialUser._id, "PUT", form);
+			setEditMode({
+				email: false,
+				bio: false,
+				avatarURL: false,
+				roles: false,
+			});
+		} catch (err: any) {
+			setError(err.message);
+		} finally {
+			setSaving(false);
+		}
+	}
+	return (
+		<Box
+			component="form"
+			onSubmit={handleSubmit}
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				gap: 3,
+				p: 3,
+				maxWidth: 600,
+				mx: "auto",
+			}}
+		>
+			<Typography variant="h5" component="h2" gutterBottom>
+				{initialUser.username}
+			</Typography>
 
-  function handleSettingChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
-    const { name, value } = e.target;
-    setForm((f) => ({ ...f, [name]: value }));
-  }
-  function handleRoleChange(newRoles: string[]) {
-    setForm((f) => ({ ...f, roles: newRoles }));
-  }
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setSaving(true);
-    setError("");
-    try {
-      await clientFetch<User>("users", initialUser._id, "PUT", form);
-      setEditMode({ email: false, bio: false, avatarURL: false, roles: false });
-    } catch (err: any) {
-      setError(err.message);
-    } finally {
-      setSaving(false);
-    }
-  }
+			{error && (
+				<Typography color="error" variant="body2">
+					{error}
+				</Typography>
+			)}
 
-  return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="max-w-md w-full bg-black p-8 rounded-lg shadow-lg">
-        <h2 className="text-5xl font-semibold text-white">[{initialUser.username}]</h2>
+			{/* Email */}
+			<FormControlLabel
+				control={
+					<Switch
+						checked={editMode.email}
+						onChange={() => toggleField("email")}
+						color="primary"
+					/>
+				}
+				label="Edit Email"
+			/>
+			<TextField
+				name="email"
+				label="Email"
+				value={form.email}
+				onChange={handleSettingChange}
+				disabled={!editMode.email}
+				fullWidth
+			/>
 
-        {error && <p className="text-red-600">{error}</p>}
+			{/* Bio */}
+			<FormControlLabel
+				control={
+					<Switch
+						checked={editMode.bio}
+						onChange={() => toggleField("bio")}
+						color="primary"
+					/>
+				}
+				label="Edit Bio"
+			/>
+			<TextField
+				name="bio"
+				label="Bio"
+				value={form.bio}
+				onChange={handleSettingChange}
+				disabled={!editMode.bio}
+				fullWidth
+				multiline
+				rows={4}
+			/>
 
-        {/** --- Email --- **/}
-        <div className="mt-4">
-        <ToggledFormInput
-            name="email"
-            label="Email"
-            initialValue={initialUser.email}
-            value={form.email}
-            editMode={editMode.email}
-            onToggle={() => toggleField("email")}
-            onChange={handleSettingChange}
-            />
-        </div>
+			{/* Avatar URL */}
+			<FormControlLabel
+				control={
+					<Switch
+						checked={editMode.avatarURL}
+						onChange={() => toggleField("avatarURL")}
+						color="primary"
+					/>
+				}
+				label="Edit Avatar URL"
+			/>
+			<TextField
+				name="avatarURL"
+				label="Avatar URL"
+				value={form.avatarURL}
+				onChange={handleSettingChange}
+				disabled={!editMode.avatarURL}
+				fullWidth
+			/>
 
-        {/** --- Bio --- **/}
-        <ToggledFormInput
-            name="bio"
-            label="Bio"
-            initialValue={initialUser.bio}
-            value={form.bio}
-            editMode={editMode.bio}
-            onToggle={() => toggleField("bio")}
-            onChange={handleSettingChange}
-            textarea
-            rows={4}
-            />
+			{/* Roles */}
+			<FormControlLabel
+				control={
+					<Switch
+						checked={editMode.roles}
+						onChange={() => toggleField("roles")}
+						color="primary"
+					/>
+				}
+				label="Edit Roles"
+			/>
+			<FormControl fullWidth disabled={!editMode.roles}>
+				<InputLabel id="roles-label">Roles</InputLabel>
+				<Select
+					labelId="roles-label"
+					multiple
+					value={form.roles}
+					onChange={(e) =>
+						handleRoleChange(
+							typeof e.target.value === "string"
+								? e.target.value.split(",")
+								: (e.target.value as string[])
+						)
+					}
+					renderValue={(selected) =>
+						(selected as string[]).join(", ")
+					}
+					label="Roles"
+				>
+					{["user", "admin", "dev"].map((role) => (
+						<MenuItem key={role} value={role}>
+							<Checkbox checked={form.roles.includes(role)} />
+							<ListItemText primary={role} />
+						</MenuItem>
+					))}
+				</Select>
+			</FormControl>
 
-        {/** --- Avatar URL --- **/}
-        <ToggledFormInput
-            name="avatarURL"
-            label="Avatar URL"
-            initialValue={initialUser.avatar}
-            value={form.avatarURL}
-            editMode={editMode.avatarURL}
-            onToggle={() => toggleField("avatarURL")}
-            onChange={handleSettingChange}
-            />
-
-        {/** --- Roles --- **/}
-        <ToggledSelectorFormInput
-            name="roles"
-            label="Roles"
-            value={form.roles}
-            editMode={editMode.roles}
-            onToggle={() => toggleField("roles")}
-            onChange={handleRoleChange}
-            options={[
-              "+user",
-              "admin",
-              "dev"
-            ]}
-          />
-        {/** --- Save --- **/}
-        <div className="flex justify-center mt-6">
-          <button
-            type="submit"
-            disabled={saving}
-            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
-          >
-            {saving ? "Saving..." : "Save Changes"}
-          </button>
-        </div>
-      </div>
-    </form>
-  );
+			{/* Save Button */}
+			<Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+				<Button
+					type="submit"
+					variant="contained"
+					color="primary"
+					disabled={saving}
+				>
+					{saving ? "Saving..." : "Save Changes"}
+				</Button>
+			</Box>
+		</Box>
+	);
 }

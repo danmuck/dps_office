@@ -1,48 +1,61 @@
 import React from "react";
-import Image from 'next/image'
+import Image from "next/image";
+import { Box, Typography, Divider } from "@mui/material";
 
 const GlobalFooter: React.FC = () => {
-    return (
-        <footer className="
-            w-full flex flex-col p-2 row-start-3 
-            gap-[2px] 
-            items-center justify-center 
-            bg-black
-        ">
-            <div className="
-                flex items-center 
-                gap-8 p-2 m-0 
-
-            ">
-                {/* <p className="text-gray-600">
-                    TEST TEXT FOR FOOTER AREA ONE
-                </p>
-                <p className="text-gray-600">
-                    TEST TEXT FOR FOOTER AREA TWO
-                </p>
-                <p className="text-gray-600">
-                    TEST TEXT FOR FOOTER AREA THREE
-                </p> */}
-            </div>
-
-            <div className=" flex flex-row items-center gap-2 m-0">
-                <h5 className="text-sm font-bold text-gray-500">frontend:</h5>
-                <p className="text-sm text-gray-600">
-                    Next.js // React // Typescript // Tailwind CSS
-                </p>
-            </div>
-            <div className=" flex flex-row items-center gap-2 m-0 pb-2">
-                <h5 className="text-sm font-bold text-gray-500">backend:</h5>
-                <p className="text-sm text-gray-600">
-                    Golang // Gin // MongoDB
-                </p>
-            </div>
-
-            <p className="w-screen flex items-center justify-center text-xs text-gray-600 bg-white p-2">
-                {new Date().getFullYear()}
-                <Image src="/full_logo.svg" alt="danmuck" width={96} height={96} className="inline-block ml-2" />
-            </p>
-        </footer>
-    );
-}
+	return (
+		<Box
+			component="footer"
+			sx={{
+				width: "100%",
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				bgcolor: "black",
+				color: "grey.300",
+				py: 2,
+			}}
+		>
+			<Box sx={{ display: "flex", gap: 2, alignItems: "center", mb: 1 }}>
+				<Typography variant="subtitle2" color="grey.500">
+					frontend:
+				</Typography>
+				<Typography variant="body2">
+					Next.js // React // Typescript // Tailwind CSS
+				</Typography>
+			</Box>
+			<Box sx={{ display: "flex", gap: 2, alignItems: "center", mb: 1 }}>
+				<Typography variant="subtitle2" color="grey.500">
+					backend:
+				</Typography>
+				<Typography variant="body2">
+					Golang // Gin // MongoDB
+				</Typography>
+			</Box>
+			<Divider sx={{ width: "100%", bgcolor: "grey.700", my: 1 }} />
+			<Box
+				sx={{
+					width: "100%",
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					bgcolor: "common.white",
+					py: 1,
+				}}
+			>
+				<Typography variant="caption" color="text.secondary">
+					{new Date().getFullYear()}
+				</Typography>
+				<Box component="span" sx={{ ml: 1 }}>
+					<Image
+						src="/full_logo.svg"
+						alt="danmuck"
+						width={96}
+						height={96}
+					/>
+				</Box>
+			</Box>
+		</Box>
+	);
+};
 export default GlobalFooter;

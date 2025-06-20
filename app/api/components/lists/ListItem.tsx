@@ -1,17 +1,27 @@
 import React from "react";
+import { ListItem as MUIListItem, ListItemText } from "@mui/material";
 
 interface ListItemProps {
 	children: React.ReactNode;
 	className?: string;
 }
 
-const ListItem: React.FC<ListItemProps> = ({ children, className = "" }) => {
+const ListItem: React.FC<ListItemProps> = ({ children, className }) => {
 	return (
-		<li
-			className={`p-2 m-1 ml-4 border-2 rounded-lg text-gray-500 ${className}`}
+		<MUIListItem
+			className={className}
+			sx={{
+				p: 1,
+				m: 1,
+				ml: 2,
+				border: "2px solid",
+				borderColor: "grey.400",
+				borderRadius: 1,
+				color: "text.secondary",
+			}}
 		>
-			{children}
-		</li>
+			<ListItemText primary={children} />
+		</MUIListItem>
 	);
 };
 export default ListItem;
