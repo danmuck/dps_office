@@ -1,7 +1,7 @@
 import {
 	apiRequest,
 	setCookiesFromResponseHeaders,
-} from "@/app/api/utils.server";
+} from "@/app/utils/fetch_api";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { redirect } from "next/navigation";
 

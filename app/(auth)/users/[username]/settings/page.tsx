@@ -1,6 +1,6 @@
-import type { User } from "@/app/api/types/user";
-import ModifyUser from "@/app/api/components/users/ModifyUser";
-import { apiFetch, UnauthorizedError } from "@/app/api/utils.server";
+import type { User } from "@/app/types/user";
+import ModifyUser from "@/app/components/users/ModifyUser";
+import { apiFetch, UnauthorizedError } from "@/app/utils/fetch_api";
 import { redirect } from "next/navigation";
 import { Container, Paper, Box, Typography } from "@mui/material";
 
@@ -13,7 +13,7 @@ export default async function ModifyUserPage({ params }: PageProps) {
 	let user = {} as User;
 	try {
 		// Fetch users from the API
-		user = await apiFetch<User>("users", username, "GET");
+		user = await apiFetch<User>("users/r", username, "GET");
 	} catch (err) {
 		if (err instanceof UnauthorizedError) {
 			// If unauthorized, redirect to login

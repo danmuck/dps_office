@@ -4,8 +4,8 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import NextLink from "next/link";
-import ProTip from "@/app/api/components/ProTip";
-import Copyright from "@/app/api/components/Copyright";
+import ProTip from "@/app/components/ProTip";
+import Copyright from "@/app/components/Copyright";
 
 export default function About() {
 	return (

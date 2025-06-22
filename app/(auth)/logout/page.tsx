@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { apiFetch } from "@/app/api/utils.server";
+import { apiFetch } from "@/app/utils/fetch_api";
 import { Container, Box, Typography, Button } from "@mui/material";
 
 export default function LogoutPage() {

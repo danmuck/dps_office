@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import GlobalHeader from "./api/components/global/Header";
-import GlobalFooter from "./api/components/global/Footer";
+import GlobalHeader from "./components/global/Header";
+import GlobalFooter from "./components/global/Footer";
 import {
 	CssBaseline,
 	InitColorSchemeScript,
@@ -9,7 +9,7 @@ import {
 	Box,
 } from "@mui/material";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
-import ModeSwitch from "./api/components/ModeSwitch";
+import ModeSwitch from "./components/ModeSwitch";
 import theme from "@/theme";
 
 export const metadata: Metadata = {
@@ -34,8 +34,17 @@ export default function RootLayout(props: { children: React.ReactNode }) {
 							}}
 						>
 							<GlobalHeader />
-							<ModeSwitch />
-							<Box component="main" sx={{ flexGrow: 1 }}>
+							<Box
+								sx={{
+									position: "absolute",
+									top: 64,
+									right: 8,
+									zIndex: 669,
+								}}
+							>
+								<ModeSwitch />
+							</Box>
+							<Box component="main" sx={{ flexGrow: 1, p: 4 }}>
 								{props.children}
 							</Box>
 							<GlobalFooter />

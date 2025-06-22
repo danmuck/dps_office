@@ -22,7 +22,7 @@ export default function NewUserPage() {
 			<Box
 				component="form"
 				method="POST"
-				action="/api/users/new"
+				action="/api/api/v1/users/new"
 				sx={{ display: "flex", flexDirection: "column", gap: 2 }}
 			>
 				<TextField

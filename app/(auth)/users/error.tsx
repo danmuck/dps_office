@@ -8,26 +8,28 @@ export default function ErrorBoundary({ error }: { error: Error }) {
 		<Container
 			component="main"
 			sx={{
-				height: "100vh",
+				height: "50vh",
 				display: "flex",
 				alignItems: "center",
 				justifyContent: "center",
-				bgcolor: "grey.100",
+				bgcolor: "error.main",
+				borderRadius: 4,
 			}}
 		>
-			<Paper elevation={3} sx={{ p: 4, textAlign: "center" }}>
+			<Paper elevation={18} sx={{ p: 4, textAlign: "center" }}>
 				<Typography variant="h4" color="error" gutterBottom>
-					{error.message}
+					[ {error.message} ]
 				</Typography>
 				<Typography variant="body1" sx={{ mb: 3 }}>
-					Sorry, something went wrong. Please try again later.
+					Oops... stay in your own lane!
 				</Typography>
 				<Button
+					// href="/"
 					variant="contained"
 					color="primary"
 					onClick={() => window.location.reload()}
 				>
-					Reload Page
+					Home
 				</Button>
 			</Paper>
 		</Container>

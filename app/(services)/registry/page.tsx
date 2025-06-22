@@ -1,5 +1,5 @@
 import React from "react";
-import RouteRegistry from "../../api/components/dev/RouteRegistry";
+import RouteRegistry from "../../components/dev/RouteRegistry";
 import { Container, Paper, Box, Typography } from "@mui/material";
 
 const RegistryLandingPage: React.FC = async () => {

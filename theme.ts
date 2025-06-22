@@ -8,13 +8,137 @@ const roboto = Roboto({
   display: 'swap',
 });
 
+
+
+const theme2 = createTheme({
+  palette: {
+    background: {
+      paper: '#fff',
+    },
+    text: {
+      primary: '#173A5E',
+      secondary: '#46505A',
+    },
+    action: {
+      active: '#001E3C',
+    },
+
+  },
+});
+
+
+
 const theme = createTheme({
-  colorSchemes: { light: true, dark: true },
+  colorSchemes: { 
+    light: {
+    palette: {
+      contrastThreshold: 4.5,
+      mode: 'light',
+      background: {
+        default: '#efefef',
+        paper: '#cddfcd',
+      },
+      primary: {
+        main: '#000000',
+        light: '#222',
+        dark: '#111',
+        contrastText: '#fff',
+      },
+      secondary: {
+        main: '#ffffff',
+        light: '#aaaaaa',
+        dark: '#555555',
+        contrastText: '#222',
+      },
+      error: {
+        main: '#7d0000',
+        light: '#7d0000',
+        dark: '#7d0000',
+        contrastText: '#fff',
+      },
+      warning: {
+        main: '#c9990f',
+        light: '#fa0000',
+        dark: '#fa0',
+        contrastText: '#fff',
+      },
+      info: {
+        main: '#1d3d54',
+        light: '#1d3d54',
+        dark: '#1d3d54',
+        contrastText: '#fff',
+      },
+      success: {
+        main: '#1d4017',
+        light: '#00aa88',
+        dark: '#00aa88',
+        contrastText: '#fff',
+      },
+      text: { 
+        primary: '#000000',
+        secondary: '#ffffff',
+        disabled: '#BDBDBD',
+      },
+    },
+  }, 
+  dark: {
+      palette: {
+        contrastThreshold: 4.5,
+        mode: 'dark',
+        background: {
+          default: '#0f130f',
+          paper: '#cddfcd',
+        },
+        primary: {
+          main: '#ffffff',
+          light: '#aaaaaa',
+          dark: '#555555',
+          contrastText: '#222',
+        },
+        secondary: {
+          main: '#000000',
+          light: '#222',
+          dark: '#111',
+          contrastText: '#444',
+        },
+        error: {
+          main: '#7d0000',
+          light: '#7d0000',
+          dark: '#7d0000',
+          contrastText: '#444',
+        },
+        warning: {
+          main: '#c9990f',
+          light: '#fa0000',
+          dark: '#fa0',
+          contrastText: '#444',
+        },
+        info: {
+          main: '#1d3d54',
+          light: '#1d3d54',
+          dark: '#1d3d54',
+          contrastText: '#444',
+        },
+        success: {
+          main: '#1d4017',
+          light: '#00aa88',
+          dark: '#00aa88',
+          contrastText: '#444',
+        },
+        text: { 
+          primary: '#fff',
+          secondary: '#000',
+          disabled: '#BDBDBD',
+        },
+}}},
   cssVariables: {
     colorSchemeSelector: 'class',
   },
   typography: {
     fontFamily: roboto.style.fontFamily,
+  },
+  shape: {
+    borderRadius: 12,
   },
   components: {
     MuiAlert: {

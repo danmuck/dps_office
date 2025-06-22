@@ -94,31 +94,33 @@ export default function Home() {
 
 			<Box sx={{ py: 2 }}>
 				<Typography variant="h5" gutterBottom>
-					Projects
+					Education
 				</Typography>
 				<List>
-					<ListItem>dps_office (frontend)</ListItem>
-					<ListItem>dps_http (backend)</ListItem>
-					<ListItem>dps_net (udp server)</ListItem>
-					<ListItem>dps_files (file server)</ListItem>
-					<ListItem>Kademlia DHT</ListItem>
-					<ListItem>Raft with KV Store</ListItem>
 					<ListItem>
-						Learning Management System API (team project)
+						SUNY at Buffalo, School of Engineering and Applied
+						Science
 					</ListItem>
+					<ListItem>Corning Community College</ListItem>
 				</List>
 			</Box>
 			<Box sx={{ py: 2 }}>
 				<Typography variant="h5" gutterBottom>
-					Aspirations
+					Skills
 				</Typography>
 				<List>
-					<ListItem>Network Engineering</ListItem>
 					<ListItem>
-						Client/Server, p2p, Cloud infrastructure
+						Arsenal: Golang C Python Rust TypeScript
 					</ListItem>
-					<ListItem>Terminal tooling && clean frontends</ListItem>
-					<ListItem>Improve my skills across the stacks</ListItem>
+					<ListItem>
+						Tooling: UNIX/MacOS Docker Git MongoDB Postgres Agile
+					</ListItem>
+					<ListItem>
+						Frameworks: Node.js / React / Next.js / Go-Gin / Django
+					</ListItem>
+					<ListItem>
+						Networking: HTTP TCP/UDP WebRTC Websockets
+					</ListItem>
 				</List>
 			</Box>
 		</Container>

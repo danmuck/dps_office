@@ -1,5 +1,5 @@
-import UserGrowthGraph from "@/app/api/components/metrics/UserGrowth";
-import { apiFetch } from "@/app/api/utils.server";
+import UserGrowthGraph from "@/app/components/metrics/UserGrowth";
+import { apiFetch } from "@/app/utils/fetch_api";
 import React from "react";
 import {
 	Container,
@@ -79,7 +79,7 @@ export default async function UserMetricsModule() {
 
 	return (
 		<Container maxWidth="md" sx={{ py: 4 }}>
-			<Paper elevation={2} sx={{ p: 3 }}>
+			<Paper elevation={2} sx={{ p: 3, color: "text.secondary" }}>
 				<Typography variant="h5" component="h2" gutterBottom>
 					User Metrics
 				</Typography>
