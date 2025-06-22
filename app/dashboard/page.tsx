@@ -1,10 +1,7 @@
 import React from "react";
+import { Container, Typography, Box } from "@mui/material";
 
 const Dashboard: React.FC = () => {
-  return (
-    <div>
-
-    </div>
-  );
-}
+	return <Container maxWidth="lg" sx={{ py: 4 }}></Container>;
+};
 export default Dashboard;

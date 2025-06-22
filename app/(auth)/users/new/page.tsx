@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { Container, Box, Typography, TextField, Button } from "@mui/material";
 
 /**
  * NewUserPage component
@@ -12,28 +13,30 @@ import React from "react";
  * @private [DEV] This page is only for development purposes and should not be used in production.
  */
 export default function NewUserPage() {
-  return (
-    <div className="max-w-md mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold">Create New User</h1>
+	return (
+		<Container maxWidth="sm" sx={{ pt: 8 }}>
+			<Typography variant="h4" component="h1" gutterBottom>
+				Create New User
+			</Typography>
 
-      <form method="POST" action="/api/users/new" className="flex flex-col gap-4">
-        <label className="block">
-          <span className="text-sm font-medium">Name</span>
-          <input
-            type="text"
-            name="username"
-            className="mt-1 block w-full border rounded p-2"
-            placeholder="username"
-          />
-        </label>
+			<Box
+				component="form"
+				method="POST"
+				action="/api/api/v1/users/new"
+				sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+			>
+				<TextField
+					label="Username"
+					name="username"
+					placeholder="username"
+					variant="outlined"
+					fullWidth
+				/>
 
-        <button
-          type="submit"
-          className="mt-2 bg-blue-600 text-white font-medium py-2 rounded"
-        >
-          Create User
-        </button>
-      </form>
-    </div>
-  );
+				<Button type="submit" variant="contained" color="primary">
+					Create User
+				</Button>
+			</Box>
+		</Container>
+	);
 }
