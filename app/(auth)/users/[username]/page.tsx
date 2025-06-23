@@ -21,7 +21,6 @@ export default async function UserLandingPage({
 						component={Link}
 						href={`/users/${username}/profile`}
 						variant="contained"
-						color="primary"
 					>
 						Go to Profile
 					</Button>

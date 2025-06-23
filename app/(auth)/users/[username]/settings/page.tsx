@@ -23,7 +23,7 @@ export default async function ModifyUserPage({ params }: PageProps) {
 	}
 	return (
 		<Container maxWidth="md" sx={{ py: 4 }}>
-			<Paper elevation={3} sx={{ p: 4, color: "text.secondary" }}>
+			<Paper elevation={3} sx={{ p: 4 }}>
 				<Typography variant="h4" component="h1" gutterBottom>
 					Settings
 				</Typography>

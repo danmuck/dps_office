@@ -26,7 +26,6 @@ export default function ErrorBoundary({ error }: { error: Error }) {
 				<Button
 					// href="/"
 					variant="contained"
-					color="primary"
 					onClick={() => window.location.reload()}
 				>
 					Home

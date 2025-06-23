@@ -18,8 +18,6 @@ export default function Home() {
 			maxWidth="lg"
 			sx={{
 				py: 4,
-				color: "text.secondary",
-				backgroundColor: "primary.light",
 				borderRadius: 2,
 			}}
 		>
@@ -28,10 +26,9 @@ export default function Home() {
 				align="center"
 				gutterBottom
 				sx={{
-					backgroundColor: "error.main",
-					color: "text.secondary",
 					p: 2,
-					borderRadius: 1,
+					color: "warning.main",
+					backgroundColor: "error.main",
 				}}
 			>
 				[ -- UNDER CONSTRUCTION -- ]

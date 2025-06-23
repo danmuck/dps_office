@@ -21,12 +21,12 @@ export default async function UsersPage() {
 	}
 
 	return (
-		<Container maxWidth="lg" sx={{ py: 4, color: "text.primary" }}>
+		<Container maxWidth="lg" sx={{ py: 4 }}>
 			<Typography variant="h4" component="h1" gutterBottom>
 				Users
 			</Typography>
 
-			<Grid container spacing={2} color={"text.secondary"}>
+			<Grid container spacing={2}>
 				{users.map((user) => (
 					<Grid key={user._id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 						<UserCard user={user} />
@@ -34,7 +34,7 @@ export default async function UsersPage() {
 				))}
 			</Grid>
 
-			<Typography variant="caption" color="text.primary" sx={{ mt: 2 }}>
+			<Typography variant="caption" sx={{ mt: 2 }}>
 				Last fetched: {new Date().toLocaleTimeString()}
 			</Typography>
 		</Container>

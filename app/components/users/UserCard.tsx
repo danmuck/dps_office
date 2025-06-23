@@ -25,7 +25,6 @@ const UserCard: React.FC<UserCardProps> = ({ user, noScroll = true }) => (
 			display: "flex",
 			flexDirection: "column",
 		}}
-		color="text.secondary"
 	>
 		<CardMedia
 			component="img"
@@ -35,19 +34,19 @@ const UserCard: React.FC<UserCardProps> = ({ user, noScroll = true }) => (
 				objectFit: "contain",
 			}}
 		/>
-		<CardHeader title={user.username} sx={{ color: "text.secondary" }} />
-		<CardActionArea sx={{ color: "text.secondary", flexGrow: 0, p: 2 }}>
+		<CardHeader title={user.username} />
+		<CardActionArea sx={{ flexGrow: 0, p: 2 }}>
 			<Button
 				size="small"
 				component={Link}
 				href={`/users/${user.username}/profile`}
-				sx={{ flexShrink: 0, color: "text.secondary" }}
+				sx={{ flexShrink: 0 }}
 			>
 				Settings
 			</Button>
 			<Button
 				size="small"
-				sx={{ flexShrink: 0, color: "text.secondary" }}
+				sx={{ flexShrink: 0 }}
 				component={Link}
 				href={`/users/${user.username}/${user._id}/banish`}
 			>
@@ -58,7 +57,6 @@ const UserCard: React.FC<UserCardProps> = ({ user, noScroll = true }) => (
 			sx={{
 				flexGrow: 1,
 				overflow: noScroll ? "visible" : "auto",
-				color: "text.secondary",
 				display: "flex-col",
 			}}
 		>

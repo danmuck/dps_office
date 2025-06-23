@@ -26,7 +26,7 @@ export default async function BanishUserPage({ params }: BanishUserPageProps) {
 					This action cannot be undone.
 				</Typography>
 				<Box sx={{ mt: 3, display: "flex", gap: 2 }}>
-					<Button type="submit" variant="contained" color="error">
+					<Button type="submit" variant="contained">
 						Yes, Banish
 					</Button>
 					<Button variant="outlined" href="/users">

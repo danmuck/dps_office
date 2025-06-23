@@ -15,10 +15,7 @@ export default function Loading() {
 		>
 			<Box sx={{ textAlign: "center" }}>
 				<CircularProgress size={64} />
-				<Typography
-					variant="body1"
-					sx={{ mt: 2, color: "text.secondary" }}
-				>
+				<Typography variant="body1" sx={{ mt: 2 }}>
 					Ein Moment...
 				</Typography>
 			</Box>

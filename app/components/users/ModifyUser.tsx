@@ -96,7 +96,6 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
 				p: 3,
 				maxWidth: 600,
 				mx: "auto",
-				color: "text.secondary",
 			}}
 		>
 			<Typography variant="h5" component="h2" gutterBottom>
@@ -115,7 +114,6 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
 					<Switch
 						checked={editMode.email}
 						onChange={() => toggleField("email")}
-						color="primary"
 					/>
 				}
 				label="Edit Email"
@@ -131,7 +129,6 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
 						readOnly: !editMode.email,
 					},
 				}}
-				color="secondary"
 				fullWidth
 			/>
 
@@ -141,7 +138,6 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
 					<Switch
 						checked={editMode.bio}
 						onChange={() => toggleField("bio")}
-						color="primary"
 					/>
 				}
 				label="Edit Bio"
@@ -163,7 +159,6 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
 					<Switch
 						checked={editMode.avatarURL}
 						onChange={() => toggleField("avatarURL")}
-						color="primary"
 					/>
 				}
 				label="Edit Avatar URL"
@@ -183,7 +178,6 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
 					<Switch
 						checked={editMode.roles}
 						onChange={() => toggleField("roles")}
-						color="primary"
 					/>
 				}
 				label="Edit Roles"
@@ -217,12 +211,7 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
 
 			{/* Save Button */}
 			<Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-				<Button
-					type="submit"
-					variant="contained"
-					color="primary"
-					disabled={saving}
-				>
+				<Button type="submit" variant="contained" disabled={saving}>
 					{saving ? "Saving..." : "Save Changes"}
 				</Button>
 			</Box>

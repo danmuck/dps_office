@@ -33,7 +33,7 @@ export default function NewUserPage() {
 					fullWidth
 				/>
 
-				<Button type="submit" variant="contained" color="primary">
+				<Button type="submit" variant="contained">
 					Create User
 				</Button>
 			</Box>
@@ -55,7 +55,7 @@ export default function NewUserPage() {
 					fullWidth
 				/>
 
-				<Button type="submit" variant="contained" color="primary">
+				<Button type="submit" variant="contained">
 					Create Users
 				</Button>
 			</Box>
@@ -78,7 +78,7 @@ export default function NewUserPage() {
 					fullWidth
 				/>
 
-				<Button type="submit" variant="contained" color="primary">
+				<Button type="submit" variant="contained">
 					Delete Users
 				</Button>
 			</Box>

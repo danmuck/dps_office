@@ -51,7 +51,6 @@ export default function DynamicTabs({ initialTabs }: TabsProps) {
 			<Box sx={{ mt: 2 }}>
 				<Button
 					variant="text"
-					color="primary"
 					onClick={() => {
 						const newId = prompt("Tab ID (unique)");
 						const newLabel = prompt("Tab Label");

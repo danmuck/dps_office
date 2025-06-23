@@ -23,7 +23,7 @@ export default function Home() {
 				<Typography variant="h4" component="h1" sx={{ mb: 2 }}>
 					Material UI - Next.js App Router example in TypeScript
 				</Typography>
-				<Link href="/mui/about" color="secondary" component={NextLink}>
+				<Link href="/mui/about" component={NextLink}>
 					Go to the about page
 				</Link>
 				<ProTip />
@@ -33,11 +33,10 @@ export default function Home() {
 				sx={{
 					mt: 4,
 					p: 3,
-					backgroundColor: "grey.900",
 					borderRadius: 1,
 				}}
 			>
-				<Typography variant="h6" color="common.white" gutterBottom>
+				<Typography variant="h6" gutterBottom>
 					Coming soon...
 				</Typography>
 				<List sx={{ listStyleType: "decimal", pl: 4 }}>

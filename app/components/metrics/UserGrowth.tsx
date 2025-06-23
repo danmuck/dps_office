@@ -36,8 +36,7 @@ export default function UserGrowthGraph({ data }: UserGrowthGraphProps) {
 				height: 256,
 				p: 2,
 				pt: 1,
-				backgroundColor: "grey.900",
-				color: "common.white",
+
 				borderRadius: 1,
 				boxShadow: 3,
 			}}
