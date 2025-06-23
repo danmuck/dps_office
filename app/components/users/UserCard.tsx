@@ -9,9 +9,8 @@ import CardActions from "@mui/material/CardActions";
 import CardActionArea from "@mui/material/CardActionArea";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
-import Box from "@mui/material/Box";
 import { Button, CardMedia } from "@mui/material";
-
+export const dynamic = "force-dynamic";
 interface UserCardProps {
 	user: User;
 	noScroll?: boolean;

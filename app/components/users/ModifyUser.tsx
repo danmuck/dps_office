@@ -16,7 +16,7 @@ import {
 	ListItemText,
 	Button,
 } from "@mui/material";
-import { clientFetch } from "../../utils/utils.client";
+import { clientFetch } from "../../utils/fetch_client";
 
 interface UserEditFormProps {
 	initialUser: User;
@@ -96,6 +96,7 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
 				p: 3,
 				maxWidth: 600,
 				mx: "auto",
+				color: "text.secondary",
 			}}
 		>
 			<Typography variant="h5" component="h2" gutterBottom>
@@ -124,7 +125,13 @@ export default function ModifyUser({ initialUser }: UserEditFormProps) {
 				label="Email"
 				value={form.email}
 				onChange={handleSettingChange}
-				disabled={!editMode.email}
+				// disabled={!editMode.email}
+				slotProps={{
+					input: {
+						readOnly: !editMode.email,
+					},
+				}}
+				color="secondary"
 				fullWidth
 			/>
 

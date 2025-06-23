@@ -37,6 +37,51 @@ export default function NewUserPage() {
 					Create User
 				</Button>
 			</Box>
+			<Typography variant="h4" component="h1" gutterBottom>
+				Create New Users
+			</Typography>
+
+			<Box
+				component="form"
+				method="POST"
+				action="/api/api/v1/admin/gcx/"
+				sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+			>
+				<TextField
+					label="Number of Users"
+					name="num_users"
+					placeholder="Number of Users"
+					variant="outlined"
+					fullWidth
+				/>
+
+				<Button type="submit" variant="contained" color="primary">
+					Create Users
+				</Button>
+			</Box>
+
+			<Typography variant="h4" component="h1" gutterBottom>
+				Delete Dummy Users
+			</Typography>
+
+			<Box
+				component="form"
+				method="POST"
+				action="/api/api/v1/admin/dcx/"
+				sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+			>
+				<TextField
+					label="Number of Users"
+					name="num_users"
+					placeholder="Number of Users"
+					variant="outlined"
+					fullWidth
+				/>
+
+				<Button type="submit" variant="contained" color="primary">
+					Delete Users
+				</Button>
+			</Box>
 		</Container>
 	);
 }

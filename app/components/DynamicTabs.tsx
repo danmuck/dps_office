@@ -62,7 +62,10 @@ export default function DynamicTabs({ initialTabs }: TabsProps) {
 									id: newId,
 									label: newLabel,
 									content: (
-										<p>This is the "{newLabel}" tab.</p>
+										<p>
+											This is the &quot{newLabel}&quot
+											tab.
+										</p>
 									),
 								},
 							]);

@@ -75,7 +75,7 @@ const GlobalHeader: React.FC = async () => {
 							</Button>
 							<Button
 								component={Link}
-								href="/users/new"
+								href="/admin/new"
 								color="inherit"
 							>
 								[dev]

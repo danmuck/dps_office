@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { Container, Box, Paper, Typography, Button } from "@mui/material";
+import { Container, Paper, Typography, Button } from "@mui/material";
 
 export default function ErrorBoundary({ error }: { error: Error }) {
 	console.error("ErrorBoundary caught an error:", error);

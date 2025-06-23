@@ -10,7 +10,7 @@ export default async function UsersPage() {
 	try {
 		// Fetch users from the API
 		users = await apiFetch<User[]>("users", "", "GET", undefined, {
-			cache: "force-cache",
+			cache: "no-store",
 		});
 	} catch (err) {
 		if (err instanceof UnauthorizedError) {
