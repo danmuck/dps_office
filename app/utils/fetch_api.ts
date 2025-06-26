@@ -16,8 +16,8 @@ const RETRY_DELAY_MS = 300;
  * This is a typed wrapper around `apiRequest` that automatically JSON.stringifies the body,
  * parses the JSON response, and returns it as the given type `T`.
  * 
- * @param endpoint - The relative path segment, e.g. "users"
- * @param rel_path - A sub-path like "dirtpig" or empty string to use only rel_path
+ * @param server - The relative path segment, e.g. "users"
+ * @param endpoint - A sub-path like "dirtpig" or empty string to use only rel_path
  * @param method - HTTP method (GET, POST, PUT, PATCH, DELETE)
  * @param body - Optional body object to be JSON.stringified
  * @returns Parsed JSON response cast to the given type `T`
@@ -39,13 +39,13 @@ const RETRY_DELAY_MS = 300;
  * users.forEach(u => console.log(u.id, u.name));
  */
 export async function apiFetch<T>(
+  server: string,
   endpoint: string,
-  rel_path: string,
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" = "GET",
   body?: any,
   options?: RequestInit
 ): Promise<T> {
-  const res = await apiRequest(endpoint, rel_path, method, body, options);
+  const res = await apiRequest(server, endpoint, method, body, options);
   return (await res.json()) as T;
 }
 
@@ -61,8 +61,8 @@ export class UnauthorizedError extends Error {
  * Makes a JWT-authenticated API request to your backend.
  * Automatically includes cookies, builds headers, logs the request, and retries on failure.
  * 
- * @param endpoint - Path like "users"
- * @param rel_path - Subpath like "dirtpig" or empty string
+ * @param server - Path like "users"
+ * @param endpoint - Subpath like "dirtpig" or empty string
  * @param method - HTTP method
  * @param body - Optional body object
  * @returns Raw `Response` object
@@ -73,8 +73,8 @@ export class UnauthorizedError extends Error {
  * const json = await res.json();
  */
 export async function apiRequest(
+  server: string,
   endpoint: string,
-  rel_path: string,
   method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE" = "GET",
   body?: any,
   options?: RequestInit
@@ -84,9 +84,9 @@ export async function apiRequest(
   const username = cookieStore.get("username")?.value.trim() ?? "";
   const id = cookieStore.get("id")?.value.trim() ?? "";
 
-  const path = rel_path ? `${endpoint}/${rel_path}` : endpoint;
+  const path = endpoint ? `${server}/${endpoint}` : server;
   const url = `${API_BASE}/${path}`;
-  const headers = new Headers({ "Content-Type": "application/json" });
+  const headers = new Headers({ "Content-Type": "application/json", Authorization: `Bearer ${token}` });
 
   // Include both JWT and username cookies in one header
   const cookieParts: string[] = [];

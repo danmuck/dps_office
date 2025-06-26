@@ -3,6 +3,14 @@ import { redirect } from "next/navigation";
 import { apiFetch } from "@/app/utils/fetch_api";
 import { Container, Box, Typography, Button } from "@mui/material";
 
+/*
+ * @todo --
+ *
+ * LogoutPage component handles user logout functionality.
+ * It provides a confirmation message and a button to log out.
+ *
+ * @returns {JSX.Element} The rendered LogoutPage component.
+ */
 export default function LogoutPage() {
 	async function logoutAction() {
 		"use server";

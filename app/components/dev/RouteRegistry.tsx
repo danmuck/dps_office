@@ -2,7 +2,7 @@
 import fs from "fs";
 import path from "path";
 // import ListItem from "../lists/ListItem";
-import { Box, Button, Grid, List, ListItem, Typography } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 
 function getRoutePaths(dir: string, parent = ""): string[] {
 	const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -72,8 +72,8 @@ export default function RouteRegistry() {
 							}
 							sx={{
 								bgcolor: isTopLevel
-									? "info.dark"
-									: "success.dark",
+									? "info.main"
+									: "success.main",
 							}}
 							fullWidth
 						>

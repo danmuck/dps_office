@@ -1,9 +1,14 @@
 import {
-	apiRequest,
-	setCookiesFromResponseHeaders,
-} from "@/app/utils/fetch_api";
+	clientFetch,
+	Response,
+	UnauthorizedError,
+} from "@/app/utils/fetch_client";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { redirect } from "next/navigation";
+
+type LoginResponse = Response<{
+	username: string;
+}>;
 
 /**
  * LoginPage component handles user login functionality.
@@ -18,22 +23,23 @@ export default function LoginPage() {
 		const username = formData.get("username") as string;
 		const password = formData.get("password") as string;
 
-		const res = await apiRequest("auth", "login", "POST", {
-			username,
-			password,
+		const response: LoginResponse = await clientFetch("users/auth/login", {
+			method: "POST",
+			body: {
+				username,
+				password,
+			},
 		});
-
-		setCookiesFromResponseHeaders(res.headers, ["jwt", "username"]);
-
-		const { username: user } = await res.json();
-
-		redirect(`/users/${encodeURIComponent(user)}/profile`);
+		if (response.error) {
+			throw new UnauthorizedError(response.error);
+		}
+		redirect(`/users/${username}/profile`);
 	}
 
 	return (
 		<Container maxWidth="sm" sx={{ pt: 8 }}>
 			<Typography variant="h4" component="h1" gutterBottom>
-				Register
+				Login
 			</Typography>
 			<Box
 				component="form"

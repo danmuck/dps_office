@@ -28,7 +28,7 @@ export default async function UsersPage() {
 
 			<Grid container spacing={2}>
 				{users.map((user) => (
-					<Grid key={user._id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
+					<Grid key={user.id} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
 						<UserCard user={user} />
 					</Grid>
 				))}

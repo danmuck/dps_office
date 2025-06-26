@@ -2,30 +2,22 @@ import { Container, Paper, Box, Typography, Button } from "@mui/material";
 import DynamicTabs, { TabItem } from "@/app/components/DynamicTabs";
 import UserCard from "@/app/components/users/UserCard";
 import type { User } from "@/app/types/user";
-import { apiFetch, UnauthorizedError } from "@/app/utils/fetch_api";
-import { redirect } from "next/navigation";
-import { cookies } from "next/headers";
+import { clientFetch, Response } from "@/app/utils/fetch_client";
 
 interface ProfilePageProps {
 	params: { username: string };
 }
+type ProfileResponse = Response<{} & User>;
 
 export default async function ProfilePage({ params }: ProfilePageProps) {
 	const { username } = await params;
-	const c = await cookies();
-	const id = c.get("sub")?.value || "unknown";
-	console.log("ProfilePage cookies:", id, username);
-	let user = {} as User;
-	try {
-		// Fetch users from the API
-		user = await apiFetch<User>("users", username, "GET");
-	} catch (err) {
-		if (err instanceof UnauthorizedError) {
-			// If unauthorized, redirect to login
-			redirect("/");
+	const user: ProfileResponse = await clientFetch(
+		`users/${username}/profile`,
+		{
+			method: "GET",
 		}
-		throw err;
-	}
+	);
+
 	// prepare tabs for DynamicTabs component
 	// note: DynamicTabs is a client component that will hydrate for interactivity
 	const tabs: TabItem[] = [
@@ -37,7 +29,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 					<Box sx={{ width: "100%", maxWidth: 600 }}>
 						<Button
 							variant="text"
-							href={`/users/${user.username}/settings`}
+							href={`/users/${username}/settings`}
 						>
 							<Typography
 								variant="h5"
@@ -52,7 +44,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 							information.
 						</Typography>
 					</Box>
-					<UserCard user={user} />
+					<UserCard user={user.data} />
 				</Box>
 			),
 		},
@@ -73,7 +65,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
 		<Container maxWidth="lg" sx={{ py: 4 }}>
 			<Paper elevation={24} sx={{ p: 3 }}>
 				<Typography variant="h4" component="h1" gutterBottom>
-					Profile: {user.username}
+					Profile: {username}
 				</Typography>
 				<Box sx={{ mt: 2 }}>
 					<DynamicTabs initialTabs={tabs} />

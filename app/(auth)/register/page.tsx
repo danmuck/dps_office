@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
-import {
-	apiRequest,
-	setCookiesFromResponseHeaders,
-	UnauthorizedError,
-} from "@/app/utils/fetch_api";
+import { Response, UnauthorizedError } from "@/app/utils/fetch_client";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { clientFetch } from "@/app/utils/fetch_client";
 
+type RegisterResponse = Response<{
+	username: string;
+}>;
 export default function RegisterPage() {
 	async function handleRegister(formData: FormData) {
 		"use server";
@@ -17,25 +17,17 @@ export default function RegisterPage() {
 		if (password !== confirm) {
 			throw new Error("Passwords do not match");
 		}
-		try {
-			const res = await apiRequest("auth", "register", "POST", {
+
+		const res: RegisterResponse = await clientFetch("users/auth/register", {
+			method: "POST",
+			body: {
 				username,
 				email,
 				password,
 				confirm,
-			});
-			await setCookiesFromResponseHeaders(res.headers, [
-				"jwt",
-				"username",
-			]);
-			const { username: user } = await res.json();
-			redirect(`/users/${encodeURIComponent(user)}/profile`);
-		} catch (err) {
-			if (err instanceof UnauthorizedError) {
-				redirect("/");
-			}
-			throw err;
-		}
+			},
+		});
+		redirect(`/users/${encodeURIComponent(res.data.username)}/profile`);
 	}
 
 	return (

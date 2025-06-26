@@ -48,7 +48,7 @@ const UserCard: React.FC<UserCardProps> = ({ user, noScroll = true }) => (
 				size="small"
 				sx={{ flexShrink: 0 }}
 				component={Link}
-				href={`/users/${user.username}/${user._id}/banish`}
+				href={`/users/${user.username}/${user.id}/banish`}
 			>
 				Banish
 			</Button>
