@@ -2,7 +2,7 @@
 import fs from "fs";
 import path from "path";
 // import ListItem from "../lists/ListItem";
-import { Box, Button, List, ListItem, Typography } from "@mui/material";
+import { Box, Button, Grid, List, ListItem, Typography } from "@mui/material";
 
 function getRoutePaths(dir: string, parent = ""): string[] {
 	const entries = fs.readdirSync(dir, { withFileTypes: true });
@@ -50,39 +50,38 @@ export default function RouteRegistry() {
 	const routes = getRoutePaths(appDir).sort();
 
 	return (
-		<Box>
-			<Typography>Available Routes</Typography>
-			<List className="space-y-2">
-				{routes
-					// .sort((a, b) => a.length - b.length)
-					.map((route) => {
-						// Count non-empty segments: a single slash route (/foo) has one segment
-						const segments = route.split("/").filter(Boolean);
+		<Grid container spacing={2} p={2} className="space-y-4">
+			<Grid size={6}>Available Routes</Grid>
 
-						const isTopLevel = segments.length === 1;
-						return (
-							<ListItem
-								key={route}
-								color={isTopLevel ? "primary" : "secondary"}
-							>
-								<Button
-									href={route}
-									variant={
-										isTopLevel ? "contained" : "outlined"
-									}
-									sx={{
-										bgcolor: isTopLevel
-											? "warning.main"
-											: "success.main",
-									}}
-									fullWidth
-								>
-									{route}
-								</Button>
-							</ListItem>
-						);
-					})}
-			</List>
-		</Box>
+			{/* .sort((a, b) => a.length - b.length) */}
+			{routes.map((route) => {
+				const segments = route.split("/").filter(Boolean);
+
+				const isTopLevel = segments.length === 1;
+				return (
+					<Grid
+						size={6}
+						key={route}
+						color={isTopLevel ? "primary" : "secondary"}
+					>
+						<Button
+							href={route}
+							variant={
+								isTopLevel ? "contained" : "contained"
+								// isTopLevel ? "outlined" : "outlined"
+							}
+							sx={{
+								bgcolor: isTopLevel
+									? "info.dark"
+									: "success.dark",
+							}}
+							fullWidth
+						>
+							{route}
+						</Button>
+					</Grid>
+				);
+			})}
+		</Grid>
 	);
 }

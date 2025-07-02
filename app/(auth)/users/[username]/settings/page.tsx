@@ -1,5 +1,5 @@
 import type { User } from "@/app/types/user";
-import ModifyUser from "@/app/components/users/ModifyUser";
+import ModifyUser from "@/app/components/auth/ModifyUser";
 import { apiFetch, UnauthorizedError } from "@/app/utils/fetch_api";
 import { redirect } from "next/navigation";
 import { Container, Paper, Box, Typography } from "@mui/material";
@@ -23,7 +23,7 @@ export default async function ModifyUserPage({ params }: PageProps) {
 	}
 	return (
 		<Container maxWidth="md" sx={{ py: 4 }}>
-			<Paper elevation={3} sx={{ p: 4, color: "text.secondary" }}>
+			<Paper elevation={3} sx={{ p: 4 }}>
 				<Typography variant="h4" component="h1" gutterBottom>
 					Settings
 				</Typography>

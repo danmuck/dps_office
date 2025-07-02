@@ -62,7 +62,7 @@ export default function RegisterPage() {
 					type="password"
 					required
 				/>
-				<Button type="submit" variant="contained" color="primary">
+				<Button type="submit" variant="contained">
 					Register
 				</Button>
 			</Box>

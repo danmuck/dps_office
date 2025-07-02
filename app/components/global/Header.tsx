@@ -2,8 +2,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import { AppBar, Toolbar, Box, Button, ThemeProvider } from "@mui/material";
-import ModeSwitch from "../ModeSwitch";
+import { AppBar, Toolbar, Box, Button } from "@mui/material";
 
 const GlobalHeader: React.FC = async () => {
 	const cooks = await cookies();
@@ -43,7 +42,12 @@ const GlobalHeader: React.FC = async () => {
 
 				{/* primary navigation */}
 				<Box sx={{ display: "flex", gap: 2, flexGrow: 1 }}>
-					<Button component={Link} href="/" color="inherit">
+					<Button
+						component={Link}
+						href="/"
+						color="inherit"
+						sx={{ float: "right" }}
+					>
 						Home
 					</Button>
 					<Button
@@ -54,25 +58,38 @@ const GlobalHeader: React.FC = async () => {
 					>
 						About
 					</Button>
-
-					<Button component={Link} href="/dashboard" color="inherit">
-						Dashboard
+					<Button
+						component={Link}
+						href="/about"
+						color="inherit"
+						sx={{ float: "right" }}
+					>
+						Projects
+					</Button>
+					<Button
+						component={Link}
+						href="/about"
+						color="inherit"
+						sx={{ float: "right" }}
+					>
+						Blog
 					</Button>
 				</Box>
 
 				{/* administrator navigation */}
 				<Box sx={{ flexGrow: 1 }}>
-					{username !== "danmuck" ? (
+					{username !== "danmuck_" ? (
 						<></>
 					) : (
 						<>
 							<Button
 								component={Link}
-								href="/registry"
+								href="/dashboard"
 								color="inherit"
 							>
-								Registry
+								Dashboard
 							</Button>
+
 							<Button
 								component={Link}
 								href="/admin/new"
@@ -97,6 +114,13 @@ const GlobalHeader: React.FC = async () => {
 						<></>
 					) : (
 						<>
+							<Button
+								component={Link}
+								href="/registry"
+								color="inherit"
+							>
+								Registry
+							</Button>
 							<Button
 								component={Link}
 								href={"/users/" + username + "/profile"}

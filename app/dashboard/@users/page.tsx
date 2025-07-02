@@ -79,7 +79,7 @@ export default async function UserMetricsModule() {
 
 	return (
 		<Container maxWidth="md" sx={{ py: 4 }}>
-			<Paper elevation={2} sx={{ p: 3, color: "text.secondary" }}>
+			<Paper elevation={2} sx={{ p: 3 }}>
 				<Typography variant="h5" component="h2" gutterBottom>
 					User Metrics
 				</Typography>
@@ -94,7 +94,7 @@ export default async function UserMetricsModule() {
 								data={user_metrics.users_over_time}
 							/>
 						</Box>
-						<Box sx={{ mt: 2, color: "text.secondary" }}>
+						<Box sx={{ mt: 2 }}>
 							<Typography variant="body2">
 								Total users: {user_metrics.total_users}
 							</Typography>

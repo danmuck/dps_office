@@ -51,28 +51,28 @@ const theme = createTheme({
         contrastText: '#222',
       },
       error: {
-        main: '#7d0000',
+        main: '#941616',
         light: '#7d0000',
-        dark: '#7d0000',
-        contrastText: '#fff',
+        dark: '#942f2f',
+        contrastText: '#444',
       },
       warning: {
-        main: '#c9990f',
-        light: '#fa0000',
-        dark: '#fa0',
-        contrastText: '#fff',
+        main: '#d9cc3b',
+        light: '#dec71b',
+        dark: '#dbda58',
+        contrastText: '#444',
       },
       info: {
-        main: '#1d3d54',
-        light: '#1d3d54',
-        dark: '#1d3d54',
-        contrastText: '#fff',
+        main: '#284b63',
+        light: '#04c4de',
+        dark: '#238b99',
+        contrastText: '#444',
       },
       success: {
-        main: '#1d4017',
-        light: '#00aa88',
-        dark: '#00aa88',
-        contrastText: '#fff',
+        main: '#40614c',
+        light: '#02d4a3',
+        dark: '#18967d',
+        contrastText: '#444',
       },
       text: { 
         primary: '#000000',
@@ -86,11 +86,11 @@ const theme = createTheme({
         contrastThreshold: 4.5,
         mode: 'dark',
         background: {
-          default: '#0f130f',
-          paper: '#cddfcd',
+          default: '#30403d', // #252b2a
+          paper: '#506e75', // #879996 #384f54
         },
         primary: {
-          main: '#ffffff',
+          main: '#ffffff',  
           light: '#aaaaaa',
           dark: '#555555',
           contrastText: '#222',
@@ -102,31 +102,31 @@ const theme = createTheme({
           contrastText: '#444',
         },
         error: {
-          main: '#7d0000',
-          light: '#7d0000',
+          main: '#941616',
+          light: '#942f2f',
           dark: '#7d0000',
           contrastText: '#444',
         },
         warning: {
-          main: '#c9990f',
-          light: '#fa0000',
-          dark: '#fa0',
+          main: '#d9cc3b',
+          light: '#dbda58',
+          dark: '#dec71b',
           contrastText: '#444',
         },
         info: {
-          main: '#1d3d54',
-          light: '#1d3d54',
-          dark: '#1d3d54',
+          main: '#284b63',
+          light: '#238b99',
+          dark: '#04c4de',
           contrastText: '#444',
         },
         success: {
-          main: '#1d4017',
-          light: '#00aa88',
-          dark: '#00aa88',
+          main: '#40614c',
+          light: '#18967d',
+          dark: '#02d4a3',
           contrastText: '#444',
         },
         text: { 
-          primary: '#fff',
+          primary: '#ffffff',
           secondary: '#000',
           disabled: '#BDBDBD',
         },
@@ -141,6 +141,14 @@ const theme = createTheme({
     borderRadius: 12,
   },
   components: {
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          color: '#000',
+          elevation: 2,
+        },
+      },
+    },
     MuiAlert: {
       styleOverrides: {
         root: {

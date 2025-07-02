@@ -19,12 +19,12 @@ export default function LogoutPage() {
 			<Typography variant="h4" component="h1" gutterBottom>
 				Logout
 			</Typography>
-			<Typography variant="body1" color="textSecondary" gutterBottom>
+			<Typography variant="body1" gutterBottom>
 				Are you sure you want to log out?
 			</Typography>
 			<form action={logoutAction}>
 				<Box sx={{ display: "flex", justifyContent: "center", mt: 4 }}>
-					<Button type="submit" variant="contained" color="error">
+					<Button type="submit" variant="contained">
 						Log out
 					</Button>
 				</Box>

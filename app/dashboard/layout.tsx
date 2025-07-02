@@ -18,7 +18,6 @@ export default function DashboardLayout({
 				spacing={4}
 				sx={{
 					border: "1px solid",
-					borderColor: "common.pink",
 					borderRadius: 1,
 					direction: "row",
 					justifyContent: "space-between",
