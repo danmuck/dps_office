@@ -1,6 +1,6 @@
 import { Container, Paper, Box, Typography, Button } from "@mui/material";
 import DynamicTabs, { TabItem } from "@/app/components/DynamicTabs";
-import UserCard from "@/app/components/users/UserCard";
+import UserCard from "@/app/components/auth/UserCard";
 import type { User } from "@/app/types/user";
 import { apiFetch, UnauthorizedError } from "@/app/utils/fetch_api";
 import { redirect } from "next/navigation";

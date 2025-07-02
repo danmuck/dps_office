@@ -28,7 +28,8 @@ export default function Home() {
 				gutterBottom
 				sx={{
 					p: 2,
-					borderRadius: 1,
+					color: "warning.main",
+					backgroundColor: "error.main",
 				}}
 			>
 				[ -- UNDER CONSTRUCTION -- ]
